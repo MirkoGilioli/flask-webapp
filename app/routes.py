@@ -1,5 +1,5 @@
-from app import app
+from app import flask_app
 
-@app.route('/')
+@flask_app.route('/')
 def home():
     return 'Wecolme to Google Cloud DevOps!'
