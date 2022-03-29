@@ -4,7 +4,7 @@ WORKDIR /webapp
 
 COPY main.py .
 COPY requirements.txt .
-COPY app .
+ADD ./app app
 
 RUN pip install -r requirements.txt
 
