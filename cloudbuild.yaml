@@ -13,11 +13,3 @@ steps:
   # Push to gcr
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME']
-  # Deploy to Cloud Run
-  - name: google/cloud-sdk
-    args: ['gcloud', 'beta', 'run', 'deploy', 'webapp', 
-           '--image=gcr.io/$PROJECT_ID/webapp:$TAG_NAME',
-           '--allow-unauthenticated', 
-           '--region', 'us-central1', 
-           '--port', '8080'
-          ]
