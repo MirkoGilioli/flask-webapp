@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: webapp-frontend-production
+  labels:
+    app: webapp
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      name: frontend
+      labels:
+        app: sample
+        role: frontend
+        env: production
+    spec:
+      containers:
+      - name: frontend
+        image: gcr.io/$PROJECT/webapp
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        env:
+        - name: COMPONENT
+          value: frontend
+        - name: VERSION
+          value: production
+        ports:
+        - name: frontend
+          containerPort: 8080
