@@ -15,7 +15,7 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME']
   # Deploy to Cloud Run
   - name: google/cloud-sdk
-    args: ['gcloud', 'run', 'deploy', 'helloworld-${SHORT_SHA}', 
+    args: ['gcloud', 'run', 'deploy', 'webapp', 
            '--image=gcr.io/$PROJECT_ID/webapp:$TAG_NAME', 
            '--region', 'us-central1', '--platform', 'managed', 
-           '--allow-unauthenticated']
+           '--allow-unauthenticated', '--port', '8080']
