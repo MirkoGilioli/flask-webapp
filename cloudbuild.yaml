@@ -15,10 +15,9 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME']
   # Deploy to Cloud Run
   - name: google/cloud-sdk
-    args: ['gcloud', 'run', 'deploy', 'webapp', 
-           '--image=gcr.io/$PROJECT_ID/webapp:$TAG_NAME', 
-           '--region', 'us-central1', '--port', '8080']
-  # Updating IAM Policy to allow allUsers
-  - name: google/cloud-sdk
-    args: ['gcloud', 'beta','run', 'services', 'add-iam-policy-binding', 
-           '--region', 'us-central1', '--member', 'allUsers', '--role', 'roles/run.invoker', 'webapp']
+    args: ['gcloud', 'beta', 'run', 'deploy', 'webapp', 
+           '--image=gcr.io/$PROJECT_ID/webapp:$TAG_NAME',
+           '--allow-unauthenticated', 
+           '--region', 'us-central1', 
+           '--port', '8080'
+          ]
