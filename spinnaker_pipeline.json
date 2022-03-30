@@ -1,0 +1,261 @@
+{
+    "appConfig": {},
+    "expectedArtifacts": [],
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "anonymous",
+    "limitConcurrent": true,
+    "parameterConfig": [
+      {
+        "default": "PROJECT_ID",
+        "description": "",
+        "hasOptions": false,
+        "label": "GCP PROJECT ID",
+        "name": "project_id",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "account": "default",
+        "cloudProvider": "kubernetes",
+        "manifestArtifactAccount": "gcs-qwiklabs-gcp-01-d07710c12557",
+        "manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "labels": {
+                "app": "webapp"
+              },
+              "name": "webapp-frontend-canary"
+            },
+            "spec": {
+              "replicas": 1,
+              "selector": {
+                "matchLabels": {
+                  "app": "webapp"
+                }
+              },
+              "template": {
+                "metadata": {
+                  "labels": {
+                    "app": "webapp",
+                    "env": "canary",
+                    "role": "frontend"
+                  },
+                  "name": "frontend"
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "image": "gcr.io/${parameters.project_id}/webapp",
+                      "imagePullPolicy": "Always",
+                      "name": "frontend",
+                      "ports": [
+                        {
+                          "containerPort": 8080,
+                          "name": "frontend"
+                        }
+                      ],
+                      "resources": {
+                        "limits": {
+                          "cpu": "100m",
+                          "memory": "500Mi"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+              "labels": {
+                "app": "webapp-frontend-canary"
+              },
+              "name": "webapp-frontend-canary"
+            },
+            "spec": {
+              "ports": [
+                {
+                  "name": "http",
+                  "port": 80,
+                  "protocol": "TCP",
+                  "targetPort": 8080
+                }
+              ],
+              "selector": {
+                "app": "webapp",
+                "env": "canary",
+                "role": "frontend"
+              },
+              "sessionAffinity": "None",
+              "type": "LoadBalancer"
+            }
+          }
+        ],
+        "moniker": {
+          "app": "webapp"
+        },
+        "name": "Pre-Staging",
+        "refId": "1",
+        "requisiteStageRefIds": [],
+        "skipExpressionEvaluation": false,
+        "source": "text",
+        "trafficManagement": {
+          "enabled": false,
+          "options": {
+            "enableTraffic": false,
+            "services": []
+          }
+        },
+        "type": "deployManifest"
+      },
+      {
+        "account": "default",
+        "cloudProvider": "kubernetes",
+        "manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "labels": {
+                "app": "webapp"
+              },
+              "name": "webapp-frontend-production"
+            },
+            "spec": {
+              "replicas": 10,
+              "selector": {
+                "matchLabels": {
+                  "app": "webapp"
+                }
+              },
+              "template": {
+                "metadata": {
+                  "labels": {
+                    "app": "webapp",
+                    "env": "production",
+                    "role": "frontend"
+                  },
+                  "name": "frontend"
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "env": [
+                        {
+                          "name": "COMPONENT",
+                          "value": "frontend"
+                        },
+                        {
+                          "name": "VERSION",
+                          "value": "production"
+                        }
+                      ],
+                      "image": "gcr.io/${parameters.project_id}/webapp",
+                      "imagePullPolicy": "Always",
+                      "name": "frontend",
+                      "ports": [
+                        {
+                          "containerPort": 8080,
+                          "name": "frontend"
+                        }
+                      ],
+                      "resources": {
+                        "limits": {
+                          "cpu": "100m",
+                          "memory": "500Mi"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+              "labels": {
+                "app": "webapp-frontend-production"
+              },
+              "name": "webapp-frontend-production"
+            },
+            "spec": {
+              "ports": [
+                {
+                  "name": "http",
+                  "port": 80,
+                  "protocol": "TCP",
+                  "targetPort": 8080
+                }
+              ],
+              "selector": {
+                "app": "webapp",
+                "env": "production",
+                "role": "frontend"
+              },
+              "sessionAffinity": "None",
+              "type": "LoadBalancer"
+            }
+          }
+        ],
+        "moniker": {
+          "app": "webapp"
+        },
+        "name": "Production",
+        "refId": "2",
+        "requisiteStageRefIds": [
+          "3"
+        ],
+        "skipExpressionEvaluation": false,
+        "source": "text",
+        "trafficManagement": {
+          "enabled": false,
+          "options": {
+            "enableTraffic": false,
+            "services": []
+          }
+        },
+        "type": "deployManifest"
+      },
+      {
+        "failPipeline": true,
+        "instructions": "Review Canary before proceding to prod",
+        "judgmentInputs": [],
+        "name": "Manual Judgment",
+        "notifications": [],
+        "refId": "3",
+        "requisiteStageRefIds": [
+          "1"
+        ],
+        "type": "manualJudgment"
+      }
+    ],
+    "triggers": [
+      {
+        "enabled": true,
+        "payloadConstraints": {
+          "tag": "gcr.io/PROJECT_ID/webapp:v*"
+        },
+        "pubsubSystem": "google",
+        "registry": "gcr.io",
+        "repository": "PROJECT_ID/webapp",
+        "subscriptionName": "gcr-triggers",
+        "type": "pubsub"
+      }
+    ],
+    "updateTs": "1648656417295"
+  }
