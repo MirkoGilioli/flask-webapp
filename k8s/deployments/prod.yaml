@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/$PROJECT/webapp
+        image: gcr.io/${parameters.project_id}/webapp
         resources:
           limits:
             memory: "500Mi"
