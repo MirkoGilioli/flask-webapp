@@ -13,7 +13,7 @@ spec:
     metadata:
       name: frontend
       labels:
-        app: sample
+        app: webapp
         role: frontend
         env: production
     spec:
