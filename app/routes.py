@@ -7,3 +7,7 @@ def home():
 @flask_app.route('/dev')
 def devPage():
     return 'Welcome this is the Development Page'
+
+@flask_app.route('/about')
+def devAbout():
+    return 'Welcome this is the about Page'
