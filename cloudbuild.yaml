@@ -9,10 +9,10 @@ steps:
     args: ["-m", "pytest", "-v"]
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME', '.']
   # Push to gcr
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME']
   # Create release in Google Cloud Deploy
   - name: google/cloud-sdk
     entrypoint: gcloud
@@ -21,5 +21,5 @@ steps:
         'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
         '--delivery-pipeline', 'webapp',
         '--region', 'us-central1',
-        '--images', 'webapp=gcr.io/$PROJECT_ID/webapp:$TAG_NAME'
+        '--images', 'webapp=us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME'
       ]
