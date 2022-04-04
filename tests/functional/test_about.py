@@ -1,7 +1,7 @@
 def test_about_page(client):
     '''
     GIVEN a Flask application
-    WHEN  the '/' page is hit with GET method
+    WHEN  the '/about' page is hit with GET method
     THEN check that 200 is returned
     '''
     resp = client.get('/about')
@@ -11,7 +11,7 @@ def test_about_page(client):
 def test_about_methodNotAllowed(client):
     '''
     GIVEN a Flask application
-    WHEN  the '/' page is hit with POST method
+    WHEN  the '/about' page is hit with POST method
     THEN check that 405 is returned (Method Not Allowed)
     '''
     resp = client.post('/about')
