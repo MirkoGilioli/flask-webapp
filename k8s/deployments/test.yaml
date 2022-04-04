@@ -19,12 +19,11 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/qwiklabs-gcp-00-60dadc26e08d/webapp:latest
+        image: gcr.io/qwiklabs-gcp-02-e210306a76fb/webapp:latest
         resources:
           limits:
             memory: "500Mi"
             cpu: "100m"
-        imagePullPolicy: Always
         ports:
         - name: frontend
           containerPort: 8080
