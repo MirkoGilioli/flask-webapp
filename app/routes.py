@@ -11,3 +11,7 @@ def devPage():
 @flask_app.route('/about')
 def devAbout():
     return 'Welcome this is the about Page'
+
+@flask_app.route('/auth')
+def devAuth():
+    return 'Welcome this is the authentication Page'
