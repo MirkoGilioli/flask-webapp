@@ -14,13 +14,12 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME']
   # Create release in Google Cloud Deploy
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - name: google/cloud-sdk
     entrypoint: gcloud
     args:
       [
-        "deploy", "releases", "create", "rel-${TAG_NAME}",
-        "--delivery-pipeline", "webapp",
-        "--region", "us-central1",
-        "--annotations", "commitId=${REVISION_ID}",
-        "--images", "webapp=gcr.io/$PROJECT_ID/webapp:${TAG_NAME}"
+        'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
+        '--delivery-pipeline', 'webapp',
+        '--region', 'us-central1',
+        '--images', 'webapp=gcr.io/$PROJECT_ID/webapp:$TAG_NAME'
       ]
