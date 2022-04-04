@@ -19,8 +19,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/qwiklabs-gcp-00-60dadc26e08d/webapp
-        imagePullPolicy: Always
+        image: gcr.io/qwiklabs-gcp-00-60dadc26e08d/webapp:latest
         resources:
           limits:
             memory: "500Mi"
