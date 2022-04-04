@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/qwiklabs-gcp-03-de44ff6cd9ea/webapp
+        image: gcr.io/qwiklabs-gcp-00-60dadc26e08d/webapp
         resources:
           limits:
             memory: "500Mi"
