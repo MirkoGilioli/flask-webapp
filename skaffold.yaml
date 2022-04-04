@@ -1,12 +1,12 @@
-apiVersion: skaffold/v2beta28
+apiVersion: skaffold/v2beta26
 kind: Config
 metadata:
   name: webapp
-build:
-  artifacts:
-  - image: gcr.io/qwiklabs-gcp-03-de44ff6cd9ea/webapp
-    docker:
-      dockerfile: Dockerfile
+# build:
+#   artifacts:
+#   - image: gcr.io/qwiklabs-gcp-03-de44ff6cd9ea/webapp
+#     docker:
+#       dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
