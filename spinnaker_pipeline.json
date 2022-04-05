@@ -55,7 +55,7 @@
                 "spec": {
                   "containers": [
                     {
-                      "image": "gcr.io/${parameters.project_id}/webapp",
+                      "image": "us-central1-docker.pkg.dev/${parameters.project_id}/webapp-repo/webapp",
                       "imagePullPolicy": "Always",
                       "name": "frontend",
                       "ports": [
@@ -163,7 +163,7 @@
                           "value": "production"
                         }
                       ],
-                      "image": "gcr.io/${parameters.project_id}/webapp",
+                      "image": "us-central1-docker.pkg.dev/${parameters.project_id}/webapp-repo/webapp",
                       "imagePullPolicy": "Always",
                       "name": "frontend",
                       "ports": [
@@ -248,11 +248,11 @@
       {
         "enabled": true,
         "payloadConstraints": {
-          "tag": "gcr.io/PROJECT_ID/webapp:v*"
+          "tag": "us-central1-docker.pkg.dev/PROJECT_ID/webapp-repo/webapp:v*"
         },
         "pubsubSystem": "google",
-        "registry": "gcr.io",
-        "repository": "PROJECT_ID/webapp",
+        "registry": "us-central1-docker.pkg.dev",
+        "repository": "PROJECT_ID/webapp-repo/webapp",
         "subscriptionName": "gcr-triggers",
         "type": "pubsub"
       }
