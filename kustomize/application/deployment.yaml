@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: pippo
+        image: webappImage
         imagePullPolicy: Always
         ports:
         - name: webapp

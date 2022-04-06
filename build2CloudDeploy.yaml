@@ -21,5 +21,6 @@ steps:
         'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
         '--delivery-pipeline', 'webapp',
         '--region', 'us-central1',
-        '--images', 'pippo=us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME'
+        '--annotation', 'commitId=${REVISION_ID}',
+        '--images', 'webappImage=us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME'
       ]
