@@ -8,7 +8,12 @@ metadata:
 #     docker:
 #       dockerfile: Dockerfile
 deploy:
-  kubectl:
-    manifests:
-    - k8s/deployments/test.yaml
-    - k8s/services/test.yaml
+  # kubectl:
+  #   manifests:
+  #   - k8s/deployments/test.yaml
+  #   - k8s/services/test.yaml
+  kustomize:
+    paths:
+      - kustomize/application
+      - kustomize/overlays/dev
+      - kustomize/overlays/prod
