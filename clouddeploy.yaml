@@ -6,9 +6,11 @@ description: main application pipeline
 serialPipeline:
  stages:
  - targetId: dev
-   profiles: []
+   profiles:
+     - development
  - targetId: prod
-   profiles: []
+   profiles:
+     - production
 ---
 
 apiVersion: deploy.cloud.google.com/v1
@@ -17,7 +19,7 @@ metadata:
  name: dev
 description: development cluster
 gke:
- cluster: projects/qwiklabs-gcp-02-e210306a76fb/locations/us-central1-c/clusters/dev
+ cluster: projects/qwiklabs-gcp-00-9f067023a1f8/locations/us-central1-c/clusters/dev
 ---
 
 apiVersion: deploy.cloud.google.com/v1
@@ -26,4 +28,4 @@ metadata:
  name: prod
 description: production cluster
 gke:
- cluster: projects/qwiklabs-gcp-02-e210306a76fb/locations/us-central1-c/clusters/prod
+ cluster: projects/qwiklabs-gcp-00-9f067023a1f8/locations/us-central1-c/clusters/prod
