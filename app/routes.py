@@ -5,13 +5,13 @@ def home():
     return 'Wecolme to Google Cloud DevOps!!!'
 
 @flask_app.route('/dev')
-def devPage():
+def dev():
     return 'Welcome this is the Development Page'
 
 @flask_app.route('/about')
-def devAbout():
+def about():
     return 'Welcome this is the about Page'
 
 @flask_app.route('/auth')
-def devAuth():
+def auth():
     return 'Welcome this is the authentication Page'
