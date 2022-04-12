@@ -15,3 +15,7 @@ def about():
 @flask_app.route('/auth')
 def auth():
     return 'Welcome this is the authentication Page'
+
+@flask_app.route('/help')
+def help():
+    return 'Welcome this is the help Page'
