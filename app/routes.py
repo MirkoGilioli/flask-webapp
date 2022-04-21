@@ -19,3 +19,7 @@ def auth():
 @flask_app.route('/help')
 def help():
     return 'Welcome this is the help Page'
+
+@flask_app.route('/orders')
+def orders():
+    return 'Welcome this is the orders Page'
