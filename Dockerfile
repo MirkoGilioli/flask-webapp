@@ -8,7 +8,6 @@ ADD ./app app
 
 RUN apt-get update && apt-get install -y build-essential python3-pip
 RUN pip install google-cloud-profiler
-RUN pip install google-python-cloud-debugger
 RUN pip install google-cloud-error-reporting --upgrade
 RUN pip install -r requirements.txt
 
