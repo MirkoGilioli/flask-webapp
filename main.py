@@ -1,5 +1,6 @@
 from app import flask_app
 import googlecloudprofiler
+import googleclouddebugger
 
 if __name__ == '__main__':
 
@@ -15,4 +16,9 @@ if __name__ == '__main__':
         )
     except (ValueError, NotImplementedError) as exc:
         print(exc)  # Handle errors here
+
+    try:
+        googleclouddebugger.enable(breakpoint_enable_canary=True)
+    except ImportError:
+        pass
     flask_app.run(debug=True, host='0.0.0.0', port=8080)
