@@ -1,10 +1,10 @@
 steps:
   # Install dependencies
-  - name: python
+  - name: python:3.7-slim
     entrypoint: pip
     args: ["install", "-r", "requirements.txt", "--user"]
   # Run unit tests
-  - name: python
+  - name: python:3.7-slim
     entrypoint: python
     args: ["-m", "pytest"]
   # Docker Build
