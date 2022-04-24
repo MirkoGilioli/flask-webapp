@@ -13,7 +13,7 @@ def method_not_allowed(e):
     error_reporting_client.report(e)
     return 405
 
-@flask_app.errorhandler(500)
-def server_error(e):
-    error_reporting_client.report(e)
-    return 500
+# @flask_app.errorhandler(500)
+# def server_error(e):
+#     error_reporting_client.report(e)
+#     return 500
