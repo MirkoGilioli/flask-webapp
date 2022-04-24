@@ -1,11 +1,10 @@
-from unittest import case
-from werkzeug.exceptions import HTTPException
 from app import flask_app
-from google.cloud import error_reporting
+from app import error_reporting_client
 
-client = error_reporting.Client()
+@flask_app.errorhandler(404)
+def not_found(e):
+    error_reporting_client.report(e)
 
-@flask_app.errorhandler(HTTPException)
-def handle_exception(e):
-    if e.code == 405:
-        client.report("Method not allowed")
+@flask_app.errorhandler(405)
+def method_not_allowed(e):
+    error_reporting_client.report(e)
