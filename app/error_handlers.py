@@ -1,5 +1,7 @@
 from app import flask_app
-from app import error_reporting_client
+from google.cloud import error_reporting
+
+error_reporting_client = error_reporting.Client()
 
 @flask_app.errorhandler(404)
 def not_found(e):
