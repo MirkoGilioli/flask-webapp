@@ -2,6 +2,10 @@ from app import flask_app
 
 @flask_app.route('/')
 def home():
+    a=5
+    b=3
+    c = a + b
+    print (c)
     return 'Wecolme to Google Cloud DevOps!!!'
 
 @flask_app.route('/dev')
