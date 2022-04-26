@@ -1,3 +1,4 @@
+from time import sleep
 from app import flask_app
 
 @flask_app.route('/')
@@ -14,6 +15,7 @@ def dev():
 
 @flask_app.route('/about')
 def about():
+    sleep(5)
     return 'Welcome this is the about Page'
 
 @flask_app.route('/auth')
