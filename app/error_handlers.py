@@ -1,10 +1,8 @@
 from app import flask_app
 from google.cloud import error_reporting
-from google import auth
 
 
-credentials, project = auth.default()
-error_reporting_client = error_reporting.Client(credentials=credentials)
+error_reporting_client = error_reporting.Client()
 
 @flask_app.errorhandler(404)
 def not_found(e):
