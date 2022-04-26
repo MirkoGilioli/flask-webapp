@@ -3,7 +3,7 @@ from google.cloud import error_reporting
 from google.oauth2 import service_account
 
 
-credentials = service_account.Credentials.from_service_account_file('qwiklabs-gcp-00-92993ad3193b-897cb748b69b.json')
+credentials = service_account.Credentials.from_service_account_file('../qwiklabs-gcp-00-92993ad3193b-897cb748b69b.json')
 error_reporting_client = error_reporting.Client(credentials=credentials)
 
 @flask_app.errorhandler(404)
