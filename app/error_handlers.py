@@ -1,9 +1,9 @@
 from app import flask_app
 from google.cloud import error_reporting
-from google.oauth2 import service_account
+from google import auth
 
 
-credentials = service_account.Credentials.from_service_account_file('../qwiklabs-gcp-00-92993ad3193b-897cb748b69b.json')
+credentials, project = auth.default()
 error_reporting_client = error_reporting.Client(credentials=credentials)
 
 @flask_app.errorhandler(404)
