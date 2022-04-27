@@ -7,10 +7,9 @@ import logging
 def not_found(e):
     # We send logging with severity ERROR to Cloud Log and Error Reporting
     logging.exception(e)
-    return 404
+
 # This handles method not allowed
 @flask_app.errorhandler(405)
 def method_not_allowed(e):
     # We send logging with severity ERROR to Cloud Log and Error Reporting
     logging.exception(e)
-    return 405
