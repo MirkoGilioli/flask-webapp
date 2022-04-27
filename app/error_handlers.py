@@ -1,15 +1,22 @@
 from app import flask_app
+from flask import json
+from werkzeug.exceptions import HTTPException
 # Imports Python standard library logging
 import logging
 
-# This handles page not found error
-@flask_app.errorhandler(404)
-def not_found(e):
+# This handles method HTTPException like 404 or 405 
+@flask_app.errorhandler(HTTPException)
+def handle_exception(e):
     # We send logging with severity ERROR to Cloud Log and Error Reporting
     logging.exception(e)
-
-# This handles method not allowed
-@flask_app.errorhandler(405)
-def method_not_allowed(e):
-    # We send logging with severity ERROR to Cloud Log and Error Reporting
-    logging.exception(e)
+    """Return JSON instead of HTML for HTTP errors."""
+    # start with the correct headers and status code from the error
+    response = e.get_response()
+    # replace the body with JSON
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    return response
