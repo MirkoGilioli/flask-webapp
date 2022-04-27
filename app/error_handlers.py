@@ -1,9 +1,5 @@
 from app import flask_app
-from google.cloud import logging
 import logging
-
-logging_client = logging.Client()
-logging_client.setup_logging()
 
 # This handles page not found error
 @flask_app.errorhandler(404)
