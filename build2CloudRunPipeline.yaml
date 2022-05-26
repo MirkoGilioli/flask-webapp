@@ -9,14 +9,14 @@ steps:
     args: ["-m", "pytest"]
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME', '.']
   # Push to gcr
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/webapp:$TAG_NAME']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME']
   # Deploy to Cloud Run
   - name: google/cloud-sdk
     args: ['gcloud', 'beta', 'run', 'deploy', 'webapp', 
-           '--image=gcr.io/$PROJECT_ID/webapp:$TAG_NAME',
+           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME',
            '--allow-unauthenticated', 
            '--region', 'us-central1', 
            '--port', '8080'
