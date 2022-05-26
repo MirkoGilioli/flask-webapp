@@ -33,3 +33,7 @@ def orders():
 @flask_app.route('/inventory')
 def inventory():
     return 'Welcome this is the inventory Page'
+
+@flask_app.route('/devClass')
+def devClass():
+    return 'Welcome this is the GCP Dev Class Page'
