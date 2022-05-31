@@ -41,3 +41,7 @@ def devClass():
 @flask_app.route('/example')
 def example():
     return 'Welcome this is the example Page'
+
+@flask_app.route('/example2')
+def example2():
+    return 'Welcome this is the example2 Page'
