@@ -37,3 +37,7 @@ def inventory():
 @flask_app.route('/devClass')
 def devClass():
     return 'Welcome this is the GCP Dev Class Page'
+
+@flask_app.route('/example')
+def example():
+    return 'Welcome this is the example Page'
